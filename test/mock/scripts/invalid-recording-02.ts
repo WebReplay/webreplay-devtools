@@ -1,4 +1,4 @@
-// Test that getting an invalid recording ID error from the backend shows an appropriate error.
+// Test that using a recording ID that isn't a valid UUID shows an appropriate error.
 
 import { runTest, devtoolsURL } from "../src/runTest";
 import { installMockEnvironment } from "../src/mockEnvironment";
@@ -7,24 +7,26 @@ import {
   createRecordingIsInitializedMock,
   createRecordingOwnerUserIdMock,
   createGetRecordingMock,
+  createRecordingIsInitializedErrorMock,
   createUserSettingsMock,
   createGetUserMock,
 } from "../src/graphql";
 import { Page } from "@recordreplay/playwright";
 
-const recordingId = uuid();
+const recordingId = "foobar";
 const userId = uuid();
 const user = { id: userId, uuid: userId };
 const graphqlMocks = [
   ...createUserSettingsMock(),
-  createRecordingIsInitializedMock({ recordingId, isInitialized: true }),
-  createRecordingOwnerUserIdMock({ recordingId, user }),
-  createGetRecordingMock({ recordingId }),
+  createRecordingIsInitializedErrorMock({ recordingId }),
+  //createRecordingIsInitializedMock({ recordingId, isInitialized: true }),
+  //createRecordingOwnerUserIdMock({ recordingId, user }),
+  //createGetRecordingMock({ recordingId }),
   ...createGetUserMock({ user }),
 ];
 
-runTest("invalidRecordingID", async (page: Page) => {
+runTest("notUUID", async (page: Page) => {
   await page.goto(devtoolsURL({ id: recordingId }));
   await installMockEnvironment(page, { graphqlMocks });
-  await page.textContent("text=You don't have permission to view this replay");
+  await new Promise(resolve => setTimeout(resolve, 5000));
 });

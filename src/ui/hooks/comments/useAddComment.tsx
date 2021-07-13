@@ -3,7 +3,7 @@ import { gql, useMutation } from "@apollo/client";
 import useAuth0 from "ui/utils/useAuth0";
 import { GET_COMMENTS } from "./comments";
 import { CommentPosition, PendingNewComment } from "ui/state/comments";
-import { GET_USER_ID } from "../users";
+import { GET_USER_ID } from "ui/graphql/users";
 
 interface NewCommentVariable extends Omit<PendingNewComment, "content"> {
   content: string;

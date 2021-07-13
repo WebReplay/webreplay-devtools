@@ -104,23 +104,31 @@ const GET_MY_RECORDINGS = gql`
 export async function isRecordingInitialized(
   recordingId: RecordingId
 ): Promise<boolean | undefined> {
-  const result = await query({
-    query: IS_RECORDING_ACCESSIBLE,
-    variables: { recordingId },
-  });
-
-  return result.data.recording?.isInitialized;
+  try {
+    const result = await query({
+      query: IS_RECORDING_ACCESSIBLE,
+      variables: { recordingId },
+    });
+    return result.data.recording?.isInitialized;
+  } catch (e) {
+    console.error(e);
+    return undefined;
+  }
 }
 
 export async function getRecordingOwnerUserId(
   recordingId: RecordingId
 ): Promise<string | undefined> {
-  const result = await query({
-    query: GET_RECORDING_USER_ID,
-    variables: { recordingId },
-  });
-
-  return result.data.recording?.owner?.id;
+  try {
+    const result = await query({
+      query: GET_RECORDING_USER_ID,
+      variables: { recordingId },
+    });
+    return result.data.recording?.owner?.id;
+  } catch (e) {
+    console.error(e);
+    return undefined;
+  }
 }
 
 export function useGetRecording(

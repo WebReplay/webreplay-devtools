@@ -15,10 +15,10 @@ const recordingId = uuid();
 const userId = uuid();
 const user = { id: userId, uuid: userId };
 const graphqlMocks = [
-  createUserSettingsMock(),
+  ...createUserSettingsMock(),
   createRecordingIsInitializedMock({ recordingId, isInitialized: true }),
   createRecordingOwnerUserIdMock({ recordingId, user }),
-  createGetUserMock({ user }),
+  ...createGetUserMock({ user }),
 ];
 
 // Test that getting a session error while loading a replay shows an appropriate error.

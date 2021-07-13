@@ -2,7 +2,7 @@ import { RecordingId } from "@recordreplay/protocol";
 import { gql, useMutation } from "@apollo/client";
 import useAuth0 from "ui/utils/useAuth0";
 import { GET_COMMENTS } from "./comments";
-import { GET_USER_ID } from "../users";
+import { GET_USER_ID } from "ui/graphql/users";
 
 interface NewReplyVariable {
   content: string;

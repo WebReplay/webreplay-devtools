@@ -5,6 +5,7 @@ import {
   IS_RECORDING_ACCESSIBLE,
 } from "ui/graphql/recordings";
 import { Recording } from "ui/types";
+import { GraphQLError } from "graphql";
 
 const mockRecording = {
   url: "https://mock.org",
@@ -42,6 +43,20 @@ export function createRecordingIsInitializedMock(opts: {
           isInitialized: opts.isInitialized,
         },
       },
+    },
+  };
+}
+
+export function createRecordingIsInitializedErrorMock(opts: {
+  recordingId: string;
+}): MockedResponse {
+  return {
+    request: {
+      query: IS_RECORDING_ACCESSIBLE,
+      variables: { recordingId: opts.recordingId },
+    },
+    result: {
+      errors: [new GraphQLError("OHNO")],
     },
   };
 }
