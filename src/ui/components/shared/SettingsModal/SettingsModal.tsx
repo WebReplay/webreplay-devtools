@@ -25,6 +25,11 @@ const settings: Settings = [
     items: [],
   },
   {
+    title: "API Keys",
+    icon: "vpn_key",
+    items: [],
+  },
+  {
     title: "Experimental",
     icon: "biotech",
     items: [

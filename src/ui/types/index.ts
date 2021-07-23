@@ -6,11 +6,24 @@ export interface User {
 }
 
 export interface UserSettings {
+  apiKeys: ApiKey[];
   showElements: boolean;
   showReact: boolean;
   enableTeams: boolean;
   enableRepaint: boolean;
   defaultWorkspaceId: null | string;
+}
+
+export interface ApiKey {
+  id: string;
+  createdAt: string;
+  label: string;
+  scopes: string[];
+}
+
+export interface ApiKeyResponse {
+  key: ApiKey;
+  keyValue: string;
 }
 
 export interface Recording {

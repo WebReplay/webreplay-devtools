@@ -1,8 +1,9 @@
 .settings-modal main {
   padding: 36px;
-  flex-grow: 1;
+  flex: 1;
   display: flex;
   flex-direction: column;
+  width: 0;
 }
 
 .settings-modal main > :not(:first-child) {

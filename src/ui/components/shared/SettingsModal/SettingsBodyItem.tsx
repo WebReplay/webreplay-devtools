@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { UserSettings } from "ui/types";
+import { ApiKey, UserSettings } from "ui/types";
 import { SettingItem } from "./types";
 import hooks from "ui/hooks";
 import { SelectMenu } from "ui/components/shared/Forms";
@@ -64,7 +64,7 @@ function Input({
   setShowRefresh,
 }: {
   item: SettingItem;
-  value: boolean | string | null;
+  value: boolean | string | ApiKey[] | null;
   setShowRefresh: Dispatch<SetStateAction<boolean>>;
 }) {
   if (item.type == "checkbox") {

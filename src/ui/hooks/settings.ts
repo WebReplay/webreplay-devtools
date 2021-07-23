@@ -4,9 +4,10 @@ import { isTest } from "ui/utils/environment";
 import { SettingItemKey } from "ui/components/shared/SettingsModal/types";
 import useAuth0 from "ui/utils/useAuth0";
 import type { UserSettings } from "../types";
-import { GET_USER_SETTINGS } from "ui/graphql/settings";
+import { ADD_USER_API_KEY, DELETE_USER_API_KEY, GET_USER_SETTINGS } from "ui/graphql/settings";
 
 const emptySettings: UserSettings = {
+  apiKeys: [],
   showElements: false,
   showReact: false,
   enableTeams: true,
@@ -15,6 +16,7 @@ const emptySettings: UserSettings = {
 };
 
 const testSettings: UserSettings = {
+  apiKeys: [],
   showElements: true,
   showReact: true,
   enableTeams: true,
@@ -63,6 +65,7 @@ function convertUserSettings(data: any): UserSettings {
 
   const settings = data.viewer.settings;
   return {
+    apiKeys: data.viewer.apiKeys,
     showElements: settings.showElements,
     showReact: settings.showReact,
     enableTeams: settings.enableTeams,
@@ -109,4 +112,20 @@ export function useUpdateDefaultWorkspace() {
   }
 
   return updateUserSetting;
+}
+
+export function useAddUserApiKey() {
+  const [addUserApiKey, { loading, error }] = useMutation(ADD_USER_API_KEY, {
+    refetchQueries: ["GetUserSettings"],
+  });
+
+  return { addUserApiKey, loading, error };
+}
+
+export function useDeleteUserApiKey() {
+  const [deleteUserApiKey, { loading, error }] = useMutation(DELETE_USER_API_KEY, {
+    refetchQueries: ["GetUserSettings"],
+  });
+
+  return { deleteUserApiKey, loading, error };
 }

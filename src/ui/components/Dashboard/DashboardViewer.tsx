@@ -123,7 +123,7 @@ export default function DashboardViewer({ recordings }: { recordings: Recording[
             <TextInput
               placeholder="Search..."
               value={searchString}
-              onChange={e => setSearchString(e.target.value)}
+              onChange={e => setSearchString((e.target as HTMLInputElement).value)}
             />
           </>
         }

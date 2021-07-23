@@ -62,7 +62,7 @@ export default function ReplayInvitations() {
           <TextInput
             placeholder="Email Address"
             value={inputValue}
-            onChange={e => setInputValue(e.target.value)}
+            onChange={e => setInputValue((e.target as HTMLInputElement).value)}
           />
           <button
             type="submit"

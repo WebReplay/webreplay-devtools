@@ -1,24 +1,13 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 
-export default function TextInput({
-  placeholder,
-  value,
-  onChange,
-  id,
-}: {
-  placeholder?: string;
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  id?: string;
-}) {
+export default function TextInput(
+  props: Omit<React.HTMLProps<HTMLInputElement>, "type" | "className">
+) {
   return (
     <input
+      {...props}
       type="text"
-      id={id}
-      onChange={onChange}
-      value={value}
       className="focus:ring-primaryAccent focus:primaryAccentHover block w-full text-lg border px-3 py-2 border-textFieldBorder rounded-md"
-      placeholder={placeholder}
     />
   );
 }

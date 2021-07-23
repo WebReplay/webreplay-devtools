@@ -5,15 +5,22 @@ import * as selectors from "ui/reducers/app";
 import { UIState } from "ui/state";
 import "./MaterialIcon.css";
 
-type MaterialIconProps = PropsFromRedux & {
-  children: string;
-  highlighted?: boolean;
-  className?: string;
-};
+type MaterialIconProps = PropsFromRedux &
+  React.HTMLProps<HTMLDivElement> & {
+    children: string;
+    highlighted?: boolean;
+  };
 
-function MaterialIcon({ children, fontLoading, highlighted, className }: MaterialIconProps) {
+function MaterialIcon({
+  children,
+  fontLoading,
+  highlighted,
+  className,
+  ...rest
+}: MaterialIconProps) {
   return (
     <div
+      {...rest}
       className={classnames(
         "material-icons",
         className,
